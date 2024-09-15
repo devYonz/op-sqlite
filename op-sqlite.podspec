@@ -53,8 +53,8 @@ Pod::Spec.new do |s|
   s.authors      = package["author"]
 
   s.platforms    = { :ios => "13.0", :osx => "10.15" }
-  s.source       = { :git => "https://github.com/op-engineering/op-sqlite.git", :tag => "#{s.version}" }
-  
+  s.source       = { :git => "https://github.com/devYonz/op-sqlite.git", :tag => "#{s.version}" }
+
   s.source_files = "ios/**/*.{h,m,mm}", "cpp/**/*.{h,cpp,c}"
 
   xcconfig = {
@@ -65,12 +65,12 @@ Pod::Spec.new do |s|
   }
 
   log_message.call("[OP-SQLITE] Configuration:")
-  
+
   if use_sqlcipher then
     log_message.call("[OP-SQLITE] using SQLCipher 🔒")
     s.exclude_files = "cpp/sqlite3.c", "cpp/sqlite3.h", "cpp/libsql/bridge.c", "cpp/libsql/bridge.h"
     xcconfig[:GCC_PREPROCESSOR_DEFINITIONS] += " OP_SQLITE_USE_SQLCIPHER=1 HAVE_FULLFSYNC=1 SQLITE_HAS_CODEC SQLITE_TEMP_STORE=2"
-    s.dependency "OpenSSL-Universal"    
+    s.dependency "OpenSSL-Universal"
   elsif use_libsql then
     log_message.call("[OP-SQLITE] using libsql 📘")
     s.exclude_files = "cpp/sqlite3.c", "cpp/sqlite3.h", "cpp/sqlcipher/sqlite3.c", "cpp/sqlcipher/sqlite3.h", "cpp/bridge.h", "cpp/bridge.cpp"
@@ -78,7 +78,7 @@ Pod::Spec.new do |s|
     log_message.call("[OP-SQLITE] using vanilla SQLite 📦")
     s.exclude_files = "cpp/sqlcipher/sqlite3.c", "cpp/sqlcipher/sqlite3.h", "cpp/libsql/bridge.c", "cpp/libsql/bridge.h"
   end
-  
+
   s.dependency "React-callinvoker"
   s.dependency "React"
   if fabric_enabled then
@@ -95,7 +95,7 @@ Pod::Spec.new do |s|
     log_message.call("[OP-SQLITE] FTS5 enabled 🔎")
     xcconfig[:GCC_PREPROCESSOR_DEFINITIONS] += " SQLITE_ENABLE_FTS5=1"
   end
- 
+
   if phone_version then
     if use_sqlcipher then
       raise "SQLCipher is not supported with phone version"
