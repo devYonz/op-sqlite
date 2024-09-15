@@ -52,7 +52,7 @@ Pod::Spec.new do |s|
   s.license      = package["license"]
   s.authors      = package["author"]
 
-  s.platforms    = { :ios => "13.0", :osx => "10.15" }
+  s.platforms    = { :ios => "13.4", :osx => "10.15" }
   s.source       = { :git => "https://github.com/devYonz/op-sqlite.git", :tag => "#{s.version}" }
 
   s.source_files = "ios/**/*.{h,m,mm}", "cpp/**/*.{h,cpp,c}"
